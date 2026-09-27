@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "postbuild": "cp -r public .next/standalone/apps/admin/ && cp -r .next/static .next/standalone/apps/admin/.next/",
+    "postbuild": "mkdir -p .next/standalone/apps/admin/.next && (cp -r public .next/standalone/apps/admin/ || true) && (cp -r .next/static .next/standalone/apps/admin/.next/ || true)",
     "start": "next start -p 3001",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",

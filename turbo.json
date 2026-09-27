@@ -1,5 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "PUBLIC_SITE_URL",
+    "NEXT_PUBLIC_SITE_URL",
+    "BACKEND_URL",
+    "ADMIN_URL",
+    "REVALIDATE_SECRET",
+    "NODE_ENV"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
