@@ -1,0 +1,34 @@
+image: node:20.18.0
+
+stages:
+  - verify
+
+variables:
+  PNPM_HOME: "$CI_PROJECT_DIR/.pnpm"
+
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - .pnpm-store
+    - .next/cache
+
+before_script:
+  - corepack enable
+  - corepack prepare pnpm@9.15.4 --activate
+  - pnpm config set store-dir .pnpm-store
+  - pnpm install --frozen-lockfile
+
+verify_job:
+  stage: verify
+  script:
+    - pnpm typecheck
+    - pnpm lint
+    - pnpm test
+    - pnpm build
+  only:
+    - merge_requests
+    - main
+    - master
+    - pushes

@@ -1,0 +1,40 @@
+module.exports = {
+  apps: [
+    {
+      name: 'storefront-web',
+      script: 'apps/web/server.js',
+      cwd: '/srv/store/web/current',
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: true,
+      max_memory_restart: '500M',
+      node_args: '--env-file=/etc/store/web.env',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3000,
+        HOSTNAME: '127.0.0.1',
+      },
+      error_file: '/var/log/pm2/web-error.log',
+      out_file: '/var/log/pm2/web-out.log',
+      time: true,
+    },
+    {
+      name: 'admin-portal',
+      script: 'apps/admin/server.js',
+      cwd: '/srv/store/admin/current',
+      instances: 1,
+      exec_mode: 'fork',
+      autorestart: true,
+      max_memory_restart: '500M',
+      node_args: '--env-file=/etc/store/admin.env',
+      env: {
+        NODE_ENV: 'production',
+        PORT: 3001,
+        HOSTNAME: '127.0.0.1',
+      },
+      error_file: '/var/log/pm2/admin-error.log',
+      out_file: '/var/log/pm2/admin-out.log',
+      time: true,
+    },
+  ],
+};

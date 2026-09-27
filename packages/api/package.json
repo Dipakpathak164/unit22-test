@@ -1,0 +1,22 @@
+{
+  "name": "@monorepo/api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "generate-types": "ts-node scripts/generate-types.ts"
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@monorepo/config": "workspace:*",
+    "openapi-typescript": "^7.6.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  }
+}
