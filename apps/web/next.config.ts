@@ -4,12 +4,10 @@ import path from 'path';
 const isVercel = Boolean(process.env.VERCEL);
 
 const nextConfig: NextConfig = {
-  ...(isVercel
-    ? {}
-    : {
-        output: 'standalone',
-        outputFileTracingRoot: path.join(__dirname, '../../'),
-      }),
+  // Vercel handles its own build output; standalone is for Docker/PM2 self-hosting
+  ...(isVercel ? {} : { output: 'standalone' }),
+  // Always set outputFileTracingRoot for monorepo dependency tracing
+  outputFileTracingRoot: path.join(__dirname, '../../'),
   transpilePackages: ['@monorepo/ui', '@monorepo/api', '@monorepo/config', '@monorepo/mocks'],
   async rewrites() {
     const adminUrl = process.env.ADMIN_URL;
