@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3001",
     "build": "next build",
-    "postbuild": "mkdir -p .next/standalone/apps/admin/.next && (cp -r public .next/standalone/apps/admin/ || true) && (cp -r .next/static .next/standalone/apps/admin/.next/ || true)",
+    "postbuild": "node -e \"if(!process.env.VERCEL){require('child_process').execSync('mkdir -p .next/standalone/apps/admin/.next && cp -r public .next/standalone/apps/admin/ && cp -r .next/static .next/standalone/apps/admin/.next/')}else{console.log('Skipping standalone postbuild on Vercel')}\"",
     "start": "next start -p 3001",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",

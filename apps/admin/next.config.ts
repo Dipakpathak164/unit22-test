@@ -5,8 +5,12 @@ const isVercel = Boolean(process.env.VERCEL);
 
 const nextConfig: NextConfig = {
   basePath: '/admin',
-  ...(isVercel ? {} : { output: 'standalone' }),
-  outputFileTracingRoot: path.join(__dirname, '../../'),
+  ...(isVercel
+    ? {}
+    : {
+        output: 'standalone',
+        outputFileTracingRoot: path.join(__dirname, '../../'),
+      }),
   transpilePackages: ['@monorepo/ui', '@monorepo/api', '@monorepo/config', '@monorepo/mocks'],
   async redirects() {
     return [
